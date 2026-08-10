@@ -12,6 +12,9 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+const ADSENSE_CLIENT = import.meta.env["VITE_ADSENSE_CLIENT_ID"] as string | undefined;
+const GA_ID = import.meta.env["VITE_GA_ID"] as string | undefined;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
