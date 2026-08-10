@@ -20,6 +20,7 @@ import { Route as CalculadoraHoraExtraRouteImport } from './routes/calculadora-h
 import { Route as CalculadoraRescisaoRouteImport } from './routes/calculadora-rescisao'
 import { Route as CalculadoraSalarioLiquidoRouteImport } from './routes/calculadora-salario-liquido'
 import { Route as CalculadoraSalarioPorHoraRouteImport } from './routes/calculadora-salario-por-hora'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -80,6 +81,11 @@ const CalculadoraSalarioPorHoraRoute =
     path: '/calculadora-salario-por-hora',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/calculadora-rescisao': typeof CalculadoraRescisaoRoute
   '/calculadora-salario-liquido': typeof CalculadoraSalarioLiquidoRoute
   '/calculadora-salario-por-hora': typeof CalculadoraSalarioPorHoraRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/calculadora-rescisao': typeof CalculadoraRescisaoRoute
   '/calculadora-salario-liquido': typeof CalculadoraSalarioLiquidoRoute
   '/calculadora-salario-por-hora': typeof CalculadoraSalarioPorHoraRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -120,6 +128,7 @@ export interface FileRoutesById {
   '/calculadora-rescisao': typeof CalculadoraRescisaoRoute
   '/calculadora-salario-liquido': typeof CalculadoraSalarioLiquidoRoute
   '/calculadora-salario-por-hora': typeof CalculadoraSalarioPorHoraRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -135,6 +144,7 @@ export interface FileRouteTypes {
     | '/calculadora-rescisao'
     | '/calculadora-salario-liquido'
     | '/calculadora-salario-por-hora'
+    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -148,6 +158,7 @@ export interface FileRouteTypes {
     | '/calculadora-rescisao'
     | '/calculadora-salario-liquido'
     | '/calculadora-salario-por-hora'
+    | '/sitemap.xml'
   id:
     | '__root__'
     | '/'
@@ -161,6 +172,7 @@ export interface FileRouteTypes {
     | '/calculadora-rescisao'
     | '/calculadora-salario-liquido'
     | '/calculadora-salario-por-hora'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -175,6 +187,7 @@ export interface RootRouteChildren {
   CalculadoraRescisaoRoute: typeof CalculadoraRescisaoRoute
   CalculadoraSalarioLiquidoRoute: typeof CalculadoraSalarioLiquidoRoute
   CalculadoraSalarioPorHoraRoute: typeof CalculadoraSalarioPorHoraRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -256,6 +269,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalculadoraSalarioPorHoraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -271,6 +291,7 @@ const rootRouteChildren: RootRouteChildren = {
   CalculadoraRescisaoRoute: CalculadoraRescisaoRoute,
   CalculadoraSalarioLiquidoRoute: CalculadoraSalarioLiquidoRoute,
   CalculadoraSalarioPorHoraRoute: CalculadoraSalarioPorHoraRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
