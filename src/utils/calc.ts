@@ -1,8 +1,14 @@
 import {
   INSS_FAIXAS,
+  INSS_TETO_SALARIAL_2026,
   IRRF_DEDUCAO_DEPENDENTE,
   IRRF_DESCONTO_SIMPLIFICADO,
   IRRF_FAIXAS,
+  IRRF_REDUCAO_2026_FORMULA_BASE,
+  IRRF_REDUCAO_2026_FORMULA_COEFICIENTE,
+  IRRF_REDUCAO_2026_LIMITE_FINAL,
+  IRRF_REDUCAO_2026_LIMITE_INTEGRAL,
+  IRRF_REDUCAO_2026_MAXIMA,
 } from "../constants/labor";
 
 export const round = (v: number) => Math.round((v + Number.EPSILON) * 100) / 100;
@@ -20,12 +26,13 @@ export const num = (v: number, casas = 2) =>
 
 /** INSS progressivo por faixas. */
 export function calcularINSS(base: number): number {
-  let restante = base;
+  const baseLimitada = Math.min(Math.max(0, base), INSS_TETO_SALARIAL_2026);
+  let restante = baseLimitada;
   let anterior = 0;
   let total = 0;
   for (const faixa of INSS_FAIXAS) {
     if (restante <= 0) break;
-    const tributavel = Math.min(base, faixa.ate) - anterior;
+    const tributavel = Math.min(baseLimitada, faixa.ate) - anterior;
     if (tributavel > 0) {
       total += tributavel * faixa.aliquota;
       restante -= tributavel;
@@ -42,7 +49,15 @@ export function calcularIRRF(baseBruta: number, inss: number, dependentes = 0): 
   const base = Math.max(0, Math.min(baseLegal, baseSimplificada));
   const faixa = IRRF_FAIXAS.find((f) => base <= f.ate);
   if (!faixa) return 0;
-  return round(Math.max(0, base * faixa.aliquota - (faixa.deducao ?? 0)));
+
+  const impostoAntesDaReducao = Math.max(0, base * faixa.aliquota - (faixa.deducao ?? 0));
+  let reducao = 0;
+  if (baseBruta <= IRRF_REDUCAO_2026_LIMITE_INTEGRAL) {
+    reducao = IRRF_REDUCAO_2026_MAXIMA;
+  } else if (baseBruta <= IRRF_REDUCAO_2026_LIMITE_FINAL) {
+    reducao = IRRF_REDUCAO_2026_FORMULA_BASE - IRRF_REDUCAO_2026_FORMULA_COEFICIENTE * baseBruta;
+  }
+  return round(Math.max(0, impostoAntesDaReducao - reducao));
 }
 
 /** Diferença em dias entre duas datas ISO (inclusiva). */

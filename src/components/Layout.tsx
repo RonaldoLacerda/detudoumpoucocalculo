@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { calculators } from "../calculators";
+import { AdBanner } from "./AdBanner";
 
 export function Header() {
   return (
@@ -67,7 +68,21 @@ export function Page({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      <main className="flex-1">{children}</main>
+      <div className="flex-1">
+        <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-6 px-4 lg:grid-cols-[160px_minmax(0,1fr)_160px] lg:px-6 xl:grid-cols-[220px_minmax(0,1fr)_220px]">
+          <aside aria-label="Publicidade lateral esquerda" className="hidden min-w-0 lg:block">
+            <div className="sticky top-24 pt-8">
+              <AdBanner slot="left" />
+            </div>
+          </aside>
+          <main className="min-w-0">{children}</main>
+          <aside aria-label="Publicidade lateral direita" className="hidden min-w-0 lg:block">
+            <div className="sticky top-24 pt-8">
+              <AdBanner slot="right" />
+            </div>
+          </aside>
+        </div>
+      </div>
       <Footer />
     </div>
   );

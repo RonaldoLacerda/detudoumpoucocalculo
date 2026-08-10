@@ -2,19 +2,21 @@ import { useEffect, useRef } from "react";
 
 const CLIENT_ID = import.meta.env["VITE_ADSENSE_CLIENT_ID"] as string | undefined;
 
-type Slot = "top" | "result" | "bottom";
+export type AdSlot = "top" | "result" | "bottom" | "left" | "right";
 
-const SLOT_IDS: Record<Slot, string | undefined> = {
+const SLOT_IDS: Record<AdSlot, string | undefined> = {
   top: import.meta.env["VITE_ADSENSE_SLOT_TOP"] as string | undefined,
   result: import.meta.env["VITE_ADSENSE_SLOT_RESULT"] as string | undefined,
   bottom: import.meta.env["VITE_ADSENSE_SLOT_BOTTOM"] as string | undefined,
+  left: import.meta.env["VITE_ADSENSE_SLOT_LEFT"] as string | undefined,
+  right: import.meta.env["VITE_ADSENSE_SLOT_RIGHT"] as string | undefined,
 };
 
 /**
  * Bloco de anúncio opcional. Sem variáveis de ambiente configuradas,
  * o componente simplesmente não renderiza nada.
  */
-export function AdBanner({ slot }: { slot: Slot }) {
+export function AdBanner({ slot }: { slot: AdSlot }) {
   const ref = useRef<HTMLModElement>(null);
   const slotId = SLOT_IDS[slot];
 
@@ -40,6 +42,7 @@ export function AdBanner({ slot }: { slot: Slot }) {
       data-ad-slot={slotId}
       data-ad-format="auto"
       data-full-width-responsive="true"
+      data-adtest={import.meta.env.DEV ? "on" : undefined}
     />
   );
 }

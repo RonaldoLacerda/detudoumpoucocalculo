@@ -11,13 +11,14 @@ export interface Faixa {
 
 /** Tabela progressiva do INSS (empregado CLT). */
 export const INSS_FAIXAS: Faixa[] = [
-  { ate: 1518.0, aliquota: 0.075 },
-  { ate: 2793.88, aliquota: 0.09 },
-  { ate: 4190.83, aliquota: 0.12 },
-  { ate: 8157.41, aliquota: 0.14 },
+  { ate: 1621.0, aliquota: 0.075 },
+  { ate: 2902.84, aliquota: 0.09 },
+  { ate: 4354.27, aliquota: 0.12 },
+  { ate: 8475.55, aliquota: 0.14 },
 ];
 
-export const INSS_TETO_CONTRIBUICAO = 951.62;
+export const INSS_TETO_SALARIAL_2026 = 8475.55;
+export const INSS_TETO_CONTRIBUICAO = 988.09;
 
 /** Tabela mensal do IRRF. */
 export const IRRF_FAIXAS: Faixa[] = [
@@ -31,6 +32,12 @@ export const IRRF_FAIXAS: Faixa[] = [
 export const IRRF_DEDUCAO_DEPENDENTE = 189.59;
 /** Desconto simplificado mensal alternativo às deduções legais. */
 export const IRRF_DESCONTO_SIMPLIFICADO = 607.2;
+
+export const IRRF_REDUCAO_2026_LIMITE_INTEGRAL = 5000;
+export const IRRF_REDUCAO_2026_LIMITE_FINAL = 7350;
+export const IRRF_REDUCAO_2026_MAXIMA = 312.89;
+export const IRRF_REDUCAO_2026_FORMULA_BASE = 978.62;
+export const IRRF_REDUCAO_2026_FORMULA_COEFICIENTE = 0.133145;
 
 /** Limite legal de desconto do vale-transporte sobre o salário. */
 export const VALE_TRANSPORTE_PERCENTUAL = 0.06;
@@ -54,6 +61,8 @@ export const ADICIONAL_NOTURNO_PERCENTUAL = 0.2;
 export const HORA_NOTURNA_REDUZIDA = 52.5 / 60;
 
 export const JORNADA_MENSAL_PADRAO = 220;
+
+export const SALARIO_MINIMO_2026 = 1621.0;
 
 export const AVISO_LEGAL =
   "Os resultados são estimativas calculadas com base nas informações fornecidas e nas regras consideradas pela ferramenta. O resultado pode variar conforme a situação individual, convenções coletivas e legislação vigente.";
