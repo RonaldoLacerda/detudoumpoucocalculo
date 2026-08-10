@@ -249,7 +249,7 @@ export const rescisao: Calculator = {
   validate: (v) => {
     const erros: Record<string, string> = {};
     if ((v["admissao"] ?? "") && (v["saida"] ?? "") && new Date((v["saida"] ?? "")) < new Date((v["admissao"] ?? ""))) {
-      erros.saida = "A data de desligamento deve ser posterior à admissão.";
+      erros["saida"] = "A data de desligamento deve ser posterior à admissão.";
     }
     return erros;
   },

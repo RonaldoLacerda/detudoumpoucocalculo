@@ -175,7 +175,7 @@ export const diasTrabalhados: Calculator = {
   validate: (v) => {
     const erros: Record<string, string> = {};
     if ((v["inicio"] ?? "") && (v["fim"] ?? "") && new Date((v["fim"] ?? "")) < new Date((v["inicio"] ?? ""))) {
-      erros.fim = "A data final deve ser posterior à data inicial.";
+      erros["fim"] = "A data final deve ser posterior à data inicial.";
     }
     return erros;
   },
