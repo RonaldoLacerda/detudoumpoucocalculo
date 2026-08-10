@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "10 calculadoras trabalhistas brasileiras gratuitas: salário líquido, férias, 13º, rescisão, hora extra e mais.",
+          "Calcule salário líquido, férias, 13º, rescisão, horas extras e outros valores trabalhistas de forma simples, rápida e gratuita.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/" },

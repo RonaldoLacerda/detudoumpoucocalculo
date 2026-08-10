@@ -84,11 +84,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Calculadoras trabalhistas simples, rápidas e gratuitas: salário líquido, férias, 13º, rescisão e mais.",
+          "Calcule salário líquido, férias, 13º, rescisão, horas extras e outros valores trabalhistas de forma simples, rápida e gratuita.",
       },
       { property: "og:site_name", content: "De Tudo Um Pouco" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "Calculadoras Trabalhistas Gratuitas | De Tudo Um Pouco" },
+      { name: "twitter:title", content: "Calculadoras Trabalhistas Gratuitas | De Tudo Um Pouco" },
+      { property: "og:description", content: "Calcule salário líquido, férias, 13º, rescisão, horas extras e outros valores trabalhistas de forma simples, rápida e gratuita." },
+      { name: "twitter:description", content: "Calcule salário líquido, férias, 13º, rescisão, horas extras e outros valores trabalhistas de forma simples, rápida e gratuita." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e85163fd81e0740a6da4c779199a34e6/id-preview-d7c04e69--a2ac79f6-4d01-4742-9a0b-8f0d7903873d.lovable.app-1786404216591.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e85163fd81e0740a6da4c779199a34e6/id-preview-d7c04e69--a2ac79f6-4d01-4742-9a0b-8f0d7903873d.lovable.app-1786404216591.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
