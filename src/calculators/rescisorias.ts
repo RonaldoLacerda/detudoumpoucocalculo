@@ -48,11 +48,11 @@ export const salarioLiquido: Calculator = {
     { name: "outros", label: "Outros descontos (plano, adiantamento...)", type: "currency", min: 0, defaultValue: "0" },
   ],
   compute: (v) => {
-    const bruto = n(v.bruto);
+    const bruto = n((v["bruto"] ?? ""));
     const inss = calcularINSS(bruto);
-    const irrf = calcularIRRF(bruto, inss, n(v.dependentes));
-    const vt = v.vt === "sim" ? round(bruto * VALE_TRANSPORTE_PERCENTUAL) : 0;
-    const outros = n(v.outros);
+    const irrf = calcularIRRF(bruto, inss, n((v["dependentes"] ?? "")));
+    const vt = (v["vt"] ?? "") === "sim" ? round(bruto * VALE_TRANSPORTE_PERCENTUAL) : 0;
+    const outros = n((v["outros"] ?? ""));
     const liquido = round(bruto - inss - irrf - vt - outros);
     return {
       lines: [
@@ -114,10 +114,10 @@ export const ferias: Calculator = {
     { name: "dependentes", label: "Número de dependentes", type: "number", min: 0, defaultValue: "0" },
   ],
   compute: (v) => {
-    const salario = n(v.salario);
-    const dias = Math.min(30, n(v.dias));
+    const salario = n((v["salario"] ?? ""));
+    const dias = Math.min(30, n((v["dias"] ?? "")));
     const diaria = salario / 30;
-    const vender = v.abono === "sim";
+    const vender = (v["abono"] ?? "") === "sim";
     const diasGozo = vender ? Math.min(dias, 20) : dias;
     const feriasValor = round(diaria * diasGozo);
     const terco = round(feriasValor / 3);
@@ -125,7 +125,7 @@ export const ferias: Calculator = {
     const tercoAbono = vender ? round(abono / 3) : 0;
     const baseTributavel = feriasValor + terco;
     const inss = calcularINSS(baseTributavel);
-    const irrf = calcularIRRF(baseTributavel, inss, n(v.dependentes));
+    const irrf = calcularIRRF(baseTributavel, inss, n((v["dependentes"] ?? "")));
     const liquido = round(baseTributavel + abono + tercoAbono - inss - irrf);
     return {
       lines: [
@@ -168,11 +168,11 @@ export const decimoTerceiro: Calculator = {
     { name: "dependentes", label: "Número de dependentes", type: "number", min: 0, defaultValue: "0" },
   ],
   compute: (v) => {
-    const salario = n(v.salario);
-    const meses = Math.min(12, n(v.meses));
+    const salario = n((v["salario"] ?? ""));
+    const meses = Math.min(12, n((v["meses"] ?? "")));
     const bruto = round((salario / 12) * meses);
     const inss = calcularINSS(bruto);
-    const irrf = calcularIRRF(bruto, inss, n(v.dependentes));
+    const irrf = calcularIRRF(bruto, inss, n((v["dependentes"] ?? "")));
     const primeira = round(bruto / 2);
     const segunda = round(bruto - primeira - inss - irrf);
     return {
@@ -248,27 +248,27 @@ export const rescisao: Calculator = {
   ],
   validate: (v) => {
     const erros: Record<string, string> = {};
-    if (v.admissao && v.saida && new Date(v.saida) < new Date(v.admissao)) {
+    if ((v["admissao"] ?? "") && (v["saida"] ?? "") && new Date((v["saida"] ?? "")) < new Date((v["admissao"] ?? ""))) {
       erros.saida = "A data de desligamento deve ser posterior à admissão.";
     }
     return erros;
   },
   compute: (v) => {
-    const salario = n(v.salario);
+    const salario = n((v["salario"] ?? ""));
     const diaria = salario / 30;
-    const saida = new Date(v.saida + "T00:00:00");
-    const motivo = v.motivo || "sem_justa_causa";
+    const saida = new Date((v["saida"] ?? "") + "T00:00:00");
+    const motivo = (v["motivo"] ?? "") || "sem_justa_causa";
 
     const saldoDias = saida.getDate();
     const saldo = round(diaria * saldoDias);
 
-    const anos = anosCompletos(v.admissao, v.saida);
+    const anos = anosCompletos((v["admissao"] ?? ""), (v["saida"] ?? ""));
     let avisoDias = Math.min(
       AVISO_PREVIO_DIAS_MAX,
       AVISO_PREVIO_DIAS_BASE + anos * AVISO_PREVIO_DIAS_POR_ANO,
     );
     let avisoValor = 0;
-    if (motivo === "justa_causa" || v.aviso === "nao" || v.aviso === "trabalhado") {
+    if (motivo === "justa_causa" || (v["aviso"] ?? "") === "nao" || (v["aviso"] ?? "") === "trabalhado") {
       avisoValor = 0;
     } else if (motivo === "acordo") {
       avisoValor = round(diaria * avisoDias * 0.5);
@@ -280,14 +280,14 @@ export const rescisao: Calculator = {
     }
 
     const inicioPeriodo = new Date(saida.getFullYear(), 0, 1).toISOString().slice(0, 10);
-    const mesesAno = mesesAvos(inicioPeriodo, v.saida);
+    const mesesAno = mesesAvos(inicioPeriodo, (v["saida"] ?? ""));
     const temProporcionais = motivo !== "justa_causa";
     const decimo = temProporcionais ? round((salario / 12) * mesesAno) : 0;
     const feriasProp = temProporcionais ? round(((salario / 12) * mesesAno * 4) / 3) : 0;
     const vencidas =
-      v.feriasVencidas === "sim" && motivo !== "justa_causa" ? round(salario * (4 / 3)) : 0;
+      (v["feriasVencidas"] ?? "") === "sim" && motivo !== "justa_causa" ? round(salario * (4 / 3)) : 0;
 
-    const mesesTotais = Math.max(1, Math.round((saida.getTime() - new Date(v.admissao + "T00:00:00").getTime()) / (30.44 * 86400000)));
+    const mesesTotais = Math.max(1, Math.round((saida.getTime() - new Date((v["admissao"] ?? "") + "T00:00:00").getTime()) / (30.44 * 86400000)));
     const fgtsSaldo = round(salario * FGTS_PERCENTUAL * mesesTotais);
     let multa = 0;
     if (motivo === "sem_justa_causa") multa = round(fgtsSaldo * FGTS_MULTA_SEM_JUSTA_CAUSA);
@@ -353,10 +353,10 @@ export const avisoPrevio: Calculator = {
     },
   ],
   compute: (v) => {
-    const salario = n(v.salario);
-    const anos = n(v.anos);
+    const salario = n((v["salario"] ?? ""));
+    const anos = n((v["anos"] ?? ""));
     const dias = Math.min(AVISO_PREVIO_DIAS_MAX, AVISO_PREVIO_DIAS_BASE + anos * AVISO_PREVIO_DIAS_POR_ANO);
-    const tipo = v.tipo || "sem_justa_causa";
+    const tipo = (v["tipo"] ?? "") || "sem_justa_causa";
     const diasDevidos = tipo === "pedido" ? AVISO_PREVIO_DIAS_BASE : dias;
     const fator = tipo === "acordo" ? 0.5 : 1;
     const valor = round((salario / 30) * diasDevidos * fator);

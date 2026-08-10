@@ -30,18 +30,18 @@ export const horaExtra: Calculator = {
     { name: "pCustom", label: "Percentual personalizado (%)", type: "number", min: 0, defaultValue: "70" },
   ],
   compute: (v) => {
-    const salario = n(v.salario);
-    const jornada = Math.max(1, n(v.jornada));
+    const salario = n((v["salario"] ?? ""));
+    const jornada = Math.max(1, n((v["jornada"] ?? "")));
     const valorHora = round(salario / jornada);
-    const v50 = round(valorHora * (1 + HORA_EXTRA_ADICIONAIS.normal) * n(v.h50));
-    const v100 = round(valorHora * (1 + HORA_EXTRA_ADICIONAIS.especial) * n(v.h100));
-    const vCustom = round(valorHora * (1 + n(v.pCustom) / 100) * n(v.hCustom));
+    const v50 = round(valorHora * (1 + HORA_EXTRA_ADICIONAIS.normal) * n((v["h50"] ?? "")));
+    const v100 = round(valorHora * (1 + HORA_EXTRA_ADICIONAIS.especial) * n((v["h100"] ?? "")));
+    const vCustom = round(valorHora * (1 + n((v["pCustom"] ?? "")) / 100) * n((v["hCustom"] ?? "")));
     return {
       lines: [
         { label: "Valor da hora normal", value: brl(valorHora), tone: "info" },
-        { label: `Horas extras 50% (${num(n(v.h50))}h)`, value: brl(v50), tone: "add" },
-        { label: `Horas extras 100% (${num(n(v.h100))}h)`, value: brl(v100), tone: "add" },
-        { label: `Horas extras ${num(n(v.pCustom))}% (${num(n(v.hCustom))}h)`, value: brl(vCustom), tone: "add" },
+        { label: `Horas extras 50% (${num(n((v["h50"] ?? "")))}h)`, value: brl(v50), tone: "add" },
+        { label: `Horas extras 100% (${num(n((v["h100"] ?? "")))}h)`, value: brl(v100), tone: "add" },
+        { label: `Horas extras ${num(n((v["pCustom"] ?? "")))}% (${num(n((v["hCustom"] ?? "")))}h)`, value: brl(vCustom), tone: "add" },
       ],
       total: { label: "Total estimado de horas extras", value: brl(round(v50 + v100 + vCustom)) },
     };
@@ -86,12 +86,12 @@ export const adicionalNoturno: Calculator = {
     },
   ],
   compute: (v) => {
-    const salario = n(v.salario);
-    const jornada = Math.max(1, n(v.jornada));
+    const salario = n((v["salario"] ?? ""));
+    const jornada = Math.max(1, n((v["jornada"] ?? "")));
     const valorHora = round(salario / jornada);
-    const horas = n(v.horas);
-    const horasEquivalentes = v.reducao === "sim" ? round(horas / HORA_NOTURNA_REDUZIDA) : horas;
-    const perc = n(v.percentual) / 100;
+    const horas = n((v["horas"] ?? ""));
+    const horasEquivalentes = (v["reducao"] ?? "") === "sim" ? round(horas / HORA_NOTURNA_REDUZIDA) : horas;
+    const perc = n((v["percentual"] ?? "")) / 100;
     const adicional = round(valorHora * horasEquivalentes * perc);
     const horasPagas = round(valorHora * horasEquivalentes);
     return {
@@ -99,7 +99,7 @@ export const adicionalNoturno: Calculator = {
         { label: "Valor da hora normal", value: brl(valorHora), tone: "info" },
         { label: "Horas noturnas consideradas", value: `${num(horasEquivalentes)}h`, tone: "info" },
         { label: "Valor das horas noturnas", value: brl(horasPagas), tone: "info" },
-        { label: `Adicional noturno (${num(n(v.percentual))}%)`, value: brl(adicional), tone: "add" },
+        { label: `Adicional noturno (${num(n((v["percentual"] ?? "")))}%)`, value: brl(adicional), tone: "add" },
       ],
       total: { label: "Adicional noturno estimado", value: brl(adicional) },
     };
@@ -132,9 +132,9 @@ export const salarioPorHora: Calculator = {
     { name: "diasMes", label: "Dias trabalhados por mês", type: "number", required: true, min: 1, max: 31, defaultValue: "22" },
   ],
   compute: (v) => {
-    const salario = n(v.salario);
-    const jornada = Math.max(1, n(v.jornada));
-    const dias = Math.max(1, n(v.diasMes));
+    const salario = n((v["salario"] ?? ""));
+    const jornada = Math.max(1, n((v["jornada"] ?? "")));
+    const dias = Math.max(1, n((v["diasMes"] ?? "")));
     const hora = round(salario / jornada);
     return {
       lines: [
@@ -174,14 +174,14 @@ export const diasTrabalhados: Calculator = {
   ],
   validate: (v) => {
     const erros: Record<string, string> = {};
-    if (v.inicio && v.fim && new Date(v.fim) < new Date(v.inicio)) {
+    if ((v["inicio"] ?? "") && (v["fim"] ?? "") && new Date((v["fim"] ?? "")) < new Date((v["inicio"] ?? ""))) {
       erros.fim = "A data final deve ser posterior à data inicial.";
     }
     return erros;
   },
   compute: (v) => {
-    const salario = n(v.salario);
-    const dias = Math.max(0, diasEntre(v.inicio, v.fim));
+    const salario = n((v["salario"] ?? ""));
+    const dias = Math.max(0, diasEntre((v["inicio"] ?? ""), (v["fim"] ?? "")));
     const bruto = round((salario / 30) * dias);
     const inss = calcularINSS(bruto);
     const irrf = calcularIRRF(bruto, inss, 0);
@@ -228,18 +228,18 @@ export const cltPj: Calculator = {
     { name: "vaPj", label: "Alimentação paga como PJ", type: "currency", min: 0, defaultValue: "0" },
   ],
   compute: (v) => {
-    const cltBruto = n(v.clt);
+    const cltBruto = n((v["clt"] ?? ""));
     const inss = calcularINSS(cltBruto);
     const irrf = calcularIRRF(cltBruto, inss, 0);
-    const beneficios = n(v.beneficios);
+    const beneficios = n((v["beneficios"] ?? ""));
     const fgts = round(cltBruto * 0.08);
     const decimoMensal = round(cltBruto / 12);
     const feriasMensal = round((cltBruto * (4 / 3)) / 12);
     const cltTotal = round(cltBruto - inss - irrf + beneficios + fgts + decimoMensal + feriasMensal);
 
-    const pjBruto = n(v.pj);
-    const impostos = round(pjBruto * (n(v.impostos) / 100));
-    const custos = n(v.contador) + n(v.saudePj) + n(v.vaPj);
+    const pjBruto = n((v["pj"] ?? ""));
+    const impostos = round(pjBruto * (n((v["impostos"] ?? "")) / 100));
+    const custos = n((v["contador"] ?? "")) + n((v["saudePj"] ?? "")) + n((v["vaPj"] ?? ""));
     const reservaFerias = round((pjBruto * (4 / 3)) / 12);
     const reservaDecimo = round(pjBruto / 12);
     const pjTotal = round(pjBruto - impostos - custos - reservaFerias - reservaDecimo);
