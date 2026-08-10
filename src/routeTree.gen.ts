@@ -10,33 +10,184 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as Calculadora13SalarioRouteImport } from './routes/calculadora-13-salario'
+import { Route as CalculadoraAdicionalNoturnoRouteImport } from './routes/calculadora-adicional-noturno'
+import { Route as CalculadoraAvisoPrevioRouteImport } from './routes/calculadora-aviso-previo'
+import { Route as CalculadoraCltPjRouteImport } from './routes/calculadora-clt-pj'
+import { Route as CalculadoraDiasTrabalhadosRouteImport } from './routes/calculadora-dias-trabalhados'
+import { Route as CalculadoraFeriasRouteImport } from './routes/calculadora-ferias'
+import { Route as CalculadoraHoraExtraRouteImport } from './routes/calculadora-hora-extra'
+import { Route as CalculadoraRescisaoRouteImport } from './routes/calculadora-rescisao'
+import { Route as CalculadoraSalarioLiquidoRouteImport } from './routes/calculadora-salario-liquido'
+import { Route as CalculadoraSalarioPorHoraRouteImport } from './routes/calculadora-salario-por-hora'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Calculadora13SalarioRoute = Calculadora13SalarioRouteImport.update({
+  id: '/calculadora-13-salario',
+  path: '/calculadora-13-salario',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculadoraAdicionalNoturnoRoute =
+  CalculadoraAdicionalNoturnoRouteImport.update({
+    id: '/calculadora-adicional-noturno',
+    path: '/calculadora-adicional-noturno',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CalculadoraAvisoPrevioRoute = CalculadoraAvisoPrevioRouteImport.update({
+  id: '/calculadora-aviso-previo',
+  path: '/calculadora-aviso-previo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculadoraCltPjRoute = CalculadoraCltPjRouteImport.update({
+  id: '/calculadora-clt-pj',
+  path: '/calculadora-clt-pj',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculadoraDiasTrabalhadosRoute =
+  CalculadoraDiasTrabalhadosRouteImport.update({
+    id: '/calculadora-dias-trabalhados',
+    path: '/calculadora-dias-trabalhados',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CalculadoraFeriasRoute = CalculadoraFeriasRouteImport.update({
+  id: '/calculadora-ferias',
+  path: '/calculadora-ferias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculadoraHoraExtraRoute = CalculadoraHoraExtraRouteImport.update({
+  id: '/calculadora-hora-extra',
+  path: '/calculadora-hora-extra',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculadoraRescisaoRoute = CalculadoraRescisaoRouteImport.update({
+  id: '/calculadora-rescisao',
+  path: '/calculadora-rescisao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalculadoraSalarioLiquidoRoute =
+  CalculadoraSalarioLiquidoRouteImport.update({
+    id: '/calculadora-salario-liquido',
+    path: '/calculadora-salario-liquido',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CalculadoraSalarioPorHoraRoute =
+  CalculadoraSalarioPorHoraRouteImport.update({
+    id: '/calculadora-salario-por-hora',
+    path: '/calculadora-salario-por-hora',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/calculadora-13-salario': typeof Calculadora13SalarioRoute
+  '/calculadora-adicional-noturno': typeof CalculadoraAdicionalNoturnoRoute
+  '/calculadora-aviso-previo': typeof CalculadoraAvisoPrevioRoute
+  '/calculadora-clt-pj': typeof CalculadoraCltPjRoute
+  '/calculadora-dias-trabalhados': typeof CalculadoraDiasTrabalhadosRoute
+  '/calculadora-ferias': typeof CalculadoraFeriasRoute
+  '/calculadora-hora-extra': typeof CalculadoraHoraExtraRoute
+  '/calculadora-rescisao': typeof CalculadoraRescisaoRoute
+  '/calculadora-salario-liquido': typeof CalculadoraSalarioLiquidoRoute
+  '/calculadora-salario-por-hora': typeof CalculadoraSalarioPorHoraRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/calculadora-13-salario': typeof Calculadora13SalarioRoute
+  '/calculadora-adicional-noturno': typeof CalculadoraAdicionalNoturnoRoute
+  '/calculadora-aviso-previo': typeof CalculadoraAvisoPrevioRoute
+  '/calculadora-clt-pj': typeof CalculadoraCltPjRoute
+  '/calculadora-dias-trabalhados': typeof CalculadoraDiasTrabalhadosRoute
+  '/calculadora-ferias': typeof CalculadoraFeriasRoute
+  '/calculadora-hora-extra': typeof CalculadoraHoraExtraRoute
+  '/calculadora-rescisao': typeof CalculadoraRescisaoRoute
+  '/calculadora-salario-liquido': typeof CalculadoraSalarioLiquidoRoute
+  '/calculadora-salario-por-hora': typeof CalculadoraSalarioPorHoraRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/calculadora-13-salario': typeof Calculadora13SalarioRoute
+  '/calculadora-adicional-noturno': typeof CalculadoraAdicionalNoturnoRoute
+  '/calculadora-aviso-previo': typeof CalculadoraAvisoPrevioRoute
+  '/calculadora-clt-pj': typeof CalculadoraCltPjRoute
+  '/calculadora-dias-trabalhados': typeof CalculadoraDiasTrabalhadosRoute
+  '/calculadora-ferias': typeof CalculadoraFeriasRoute
+  '/calculadora-hora-extra': typeof CalculadoraHoraExtraRoute
+  '/calculadora-rescisao': typeof CalculadoraRescisaoRoute
+  '/calculadora-salario-liquido': typeof CalculadoraSalarioLiquidoRoute
+  '/calculadora-salario-por-hora': typeof CalculadoraSalarioPorHoraRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/calculadora-13-salario'
+    | '/calculadora-adicional-noturno'
+    | '/calculadora-aviso-previo'
+    | '/calculadora-clt-pj'
+    | '/calculadora-dias-trabalhados'
+    | '/calculadora-ferias'
+    | '/calculadora-hora-extra'
+    | '/calculadora-rescisao'
+    | '/calculadora-salario-liquido'
+    | '/calculadora-salario-por-hora'
+    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/calculadora-13-salario'
+    | '/calculadora-adicional-noturno'
+    | '/calculadora-aviso-previo'
+    | '/calculadora-clt-pj'
+    | '/calculadora-dias-trabalhados'
+    | '/calculadora-ferias'
+    | '/calculadora-hora-extra'
+    | '/calculadora-rescisao'
+    | '/calculadora-salario-liquido'
+    | '/calculadora-salario-por-hora'
+    | '/sitemap.xml'
+  id:
+    | '__root__'
+    | '/'
+    | '/calculadora-13-salario'
+    | '/calculadora-adicional-noturno'
+    | '/calculadora-aviso-previo'
+    | '/calculadora-clt-pj'
+    | '/calculadora-dias-trabalhados'
+    | '/calculadora-ferias'
+    | '/calculadora-hora-extra'
+    | '/calculadora-rescisao'
+    | '/calculadora-salario-liquido'
+    | '/calculadora-salario-por-hora'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  Calculadora13SalarioRoute: typeof Calculadora13SalarioRoute
+  CalculadoraAdicionalNoturnoRoute: typeof CalculadoraAdicionalNoturnoRoute
+  CalculadoraAvisoPrevioRoute: typeof CalculadoraAvisoPrevioRoute
+  CalculadoraCltPjRoute: typeof CalculadoraCltPjRoute
+  CalculadoraDiasTrabalhadosRoute: typeof CalculadoraDiasTrabalhadosRoute
+  CalculadoraFeriasRoute: typeof CalculadoraFeriasRoute
+  CalculadoraHoraExtraRoute: typeof CalculadoraHoraExtraRoute
+  CalculadoraRescisaoRoute: typeof CalculadoraRescisaoRoute
+  CalculadoraSalarioLiquidoRoute: typeof CalculadoraSalarioLiquidoRoute
+  CalculadoraSalarioPorHoraRoute: typeof CalculadoraSalarioPorHoraRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +199,100 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calculadora-13-salario': {
+      id: '/calculadora-13-salario'
+      path: '/calculadora-13-salario'
+      fullPath: '/calculadora-13-salario'
+      preLoaderRoute: typeof Calculadora13SalarioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculadora-adicional-noturno': {
+      id: '/calculadora-adicional-noturno'
+      path: '/calculadora-adicional-noturno'
+      fullPath: '/calculadora-adicional-noturno'
+      preLoaderRoute: typeof CalculadoraAdicionalNoturnoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculadora-aviso-previo': {
+      id: '/calculadora-aviso-previo'
+      path: '/calculadora-aviso-previo'
+      fullPath: '/calculadora-aviso-previo'
+      preLoaderRoute: typeof CalculadoraAvisoPrevioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculadora-clt-pj': {
+      id: '/calculadora-clt-pj'
+      path: '/calculadora-clt-pj'
+      fullPath: '/calculadora-clt-pj'
+      preLoaderRoute: typeof CalculadoraCltPjRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculadora-dias-trabalhados': {
+      id: '/calculadora-dias-trabalhados'
+      path: '/calculadora-dias-trabalhados'
+      fullPath: '/calculadora-dias-trabalhados'
+      preLoaderRoute: typeof CalculadoraDiasTrabalhadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculadora-ferias': {
+      id: '/calculadora-ferias'
+      path: '/calculadora-ferias'
+      fullPath: '/calculadora-ferias'
+      preLoaderRoute: typeof CalculadoraFeriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculadora-hora-extra': {
+      id: '/calculadora-hora-extra'
+      path: '/calculadora-hora-extra'
+      fullPath: '/calculadora-hora-extra'
+      preLoaderRoute: typeof CalculadoraHoraExtraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculadora-rescisao': {
+      id: '/calculadora-rescisao'
+      path: '/calculadora-rescisao'
+      fullPath: '/calculadora-rescisao'
+      preLoaderRoute: typeof CalculadoraRescisaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculadora-salario-liquido': {
+      id: '/calculadora-salario-liquido'
+      path: '/calculadora-salario-liquido'
+      fullPath: '/calculadora-salario-liquido'
+      preLoaderRoute: typeof CalculadoraSalarioLiquidoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculadora-salario-por-hora': {
+      id: '/calculadora-salario-por-hora'
+      path: '/calculadora-salario-por-hora'
+      fullPath: '/calculadora-salario-por-hora'
+      preLoaderRoute: typeof CalculadoraSalarioPorHoraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  Calculadora13SalarioRoute: Calculadora13SalarioRoute,
+  CalculadoraAdicionalNoturnoRoute: CalculadoraAdicionalNoturnoRoute,
+  CalculadoraAvisoPrevioRoute: CalculadoraAvisoPrevioRoute,
+  CalculadoraCltPjRoute: CalculadoraCltPjRoute,
+  CalculadoraDiasTrabalhadosRoute: CalculadoraDiasTrabalhadosRoute,
+  CalculadoraFeriasRoute: CalculadoraFeriasRoute,
+  CalculadoraHoraExtraRoute: CalculadoraHoraExtraRoute,
+  CalculadoraRescisaoRoute: CalculadoraRescisaoRoute,
+  CalculadoraSalarioLiquidoRoute: CalculadoraSalarioLiquidoRoute,
+  CalculadoraSalarioPorHoraRoute: CalculadoraSalarioPorHoraRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
