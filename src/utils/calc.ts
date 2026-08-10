@@ -40,7 +40,8 @@ export function calcularIRRF(baseBruta: number, inss: number, dependentes = 0): 
   const baseLegal = baseBruta - inss - dependentes * IRRF_DEDUCAO_DEPENDENTE;
   const baseSimplificada = baseBruta - IRRF_DESCONTO_SIMPLIFICADO;
   const base = Math.max(0, Math.min(baseLegal, baseSimplificada));
-  const faixa = IRRF_FAIXAS.find((f) => base <= f.ate) ?? IRRF_FAIXAS[IRRF_FAIXAS.length - 1];
+  const faixa = IRRF_FAIXAS.find((f) => base <= f.ate);
+  if (!faixa) return 0;
   return round(Math.max(0, base * faixa.aliquota - (faixa.deducao ?? 0)));
 }
 
